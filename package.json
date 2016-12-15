@@ -1,0 +1,28 @@
+{
+  "name": "postcss-deg-unit",
+  "version": "0.0.0",
+  "description": "PostCSS plugin to add 'deg' unit to `rotate()` method",
+  "keywords": [
+  	"css",
+  	"scss",
+  	"less",
+  	"postcss",
+  	"postcss-deg-unit",
+    "rotate()",
+    "rotate",
+  	"transform",
+  ],
+  "main": "index.js",
+  "author": "Marten Zander",
+  "license": "MIT",
+  "dependencies": {
+    "postcss": "^5.2.5"
+  },
+  "devDependencies": {
+    "ava": "^0.17.0",
+    "eslint": "^3.8.1",
+    "eslint-config-standard": "^6.2.0",
+    "eslint-plugin-promise": "^3.3.0",
+    "eslint-plugin-standard": "^2.0.1"
+  },
+}
