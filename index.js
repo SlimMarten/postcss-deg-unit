@@ -24,52 +24,75 @@ module.exports = postcss.plugin( 'postcss-deg-unit', function ( options ) {
 
 		/*----------  global functions  ----------*/
 		function getComparedValue(singleVal){
+			let hasUnit = false;
 
+			// check if a unit is already given
 			for(let i = 0; i < rotateUnits.length; i++){
 				let curUnit = rotateUnits[i];
-				console.log(singleVal);
 
 				if(singleVal.indexOf(curUnit) > -1){
-					return singleVal;
-				}else{
-					return singleVal += unit;
-				};
+					hasUnit = true;
+				}
+			}
+
+			// return value with or without default unit
+			if(!hasUnit){
+				const output = singleVal += unit;
+				return output;
+			}else{
+				return singleVal;
 			}
 		}
 
 		function getValuesWithUnit(vals){
+
 
 			for(let i = 0; i < vals.length; i++){
 				let hasUnit = false;
 				let curVal = vals[i];
 
 				let newValue = getComparedValue(curVal);
-
-
 				vals[i] = newValue;
 			}
 
 			return vals;
 		}
 
-		function checkValueCount(vals){
+		function getOperationState(vals){
 			switch(vals.length){
 				case 0:
 					console.warn('Your Rotation is empty bro.');
+					return false;
 					break;
 				case 1:
-					console.log('congrats you can rotate');
+					return 0;
 					break;
 				case 2:
 					console.log('what axis was it again!?');
+					return false;
 					break;
 				case 3:
 					console.log('what axis was it again!?');
+					return false;
 					break;
 				case 4:
-					console.log('congrats you can rotate');
+					return 1;
 					break;
 			}
+		}
+
+		function getStringFromArray(array){
+			let string = '';
+
+			for(let i = 0; i < array.length; i++){
+				string += array[i];
+
+				if(i !== array.length){
+					string += ' ';
+				}
+			}
+
+			return string;
 		}
 
 		// walk rules
@@ -84,9 +107,16 @@ module.exports = postcss.plugin( 'postcss-deg-unit', function ( options ) {
 				const rotationValueString = rotation[2];
 				const rotationValues = rotationValueString.split(',');
 
-				checkValueCount(rotationValues);
-				const modifiedValues = getValuesWithUnit(rotationValues);
-				console.log(modifiedValues);
+				const operationState = getOperationState(rotationValues);
+
+				if(operationState == 0){
+					const modifiedValues = getValuesWithUnit(rotationValues);
+					const output = getStringFromArray(modifiedValues);
+					console.log(output);
+				}else{
+					console.log('something went wrong');
+					return;
+				}
 
 			} );
 		} );
