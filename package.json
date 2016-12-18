@@ -1,7 +1,7 @@
 {
   "name": "postcss-rotate-unit",
   "version": "0.0.0",
-  "description": "PostCSS plugin to add 'deg' unit to `rotate()` method",
+  "description": "PostCSS plugin to add a default unit to your `rotate()` values",
   "keywords": [
   	"css",
   	"scss",
