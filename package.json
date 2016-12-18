@@ -1,7 +1,10 @@
 {
   "name": "postcss-rotate-unit",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "PostCSS plugin to add a default unit to your `rotate()` values",
+  "scripts": {
+    "test" : "eslint index.js"
+  },
   "keywords": [
   	"css",
   	"scss",
