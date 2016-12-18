@@ -7,9 +7,13 @@
   	"scss",
   	"less",
   	"postcss",
-  	"postcss-deg-unit",
+  	"postcss-rotate-unit",
     "rotate()",
     "rotate",
+    "rotateX",
+    "rotateY",
+    "rotateZ",
+    "rotate3d",
   	"transform"
   ],
   "main": "index.js",
@@ -19,7 +23,6 @@
     "postcss": "^5.2.5"
   },
   "devDependencies": {
-    "ava": "^0.17.0",
     "eslint": "^3.8.1",
     "eslint-config-standard": "^6.2.0",
     "eslint-plugin-promise": "^3.3.0",
