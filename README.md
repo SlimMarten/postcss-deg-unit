@@ -1,4 +1,4 @@
-# postcss-rotate-unit [![Build Status](https://travis-ci.org/SlimMarten/postcss-rotate-unit.svg?branch=develop)](https://travis-ci.org/SlimMarten/postcss-rotate-unit)
+# postcss-rotate-unit [![Build Status](https://travis-ci.org/SlimMarten/postcss-rotate-unit.svg?branch=master)](https://travis-ci.org/SlimMarten/postcss-rotate-unit)
 
 > [PostCSS](https://github.com/postcss/postcss) plugin to add a default unit to your `rotate()` values.
 
@@ -41,5 +41,5 @@ var postcssProcessors = [
 ]
 ```
 
-## [License](https://github.com/SlimMarten/postcss-rotate-unit/blob/develop/LICENSE)
-## [Changelog](https://github.com/SlimMarten/postcss-rotate-unit/blob/develop/CHANGELOG.md)
+## [License](https://github.com/SlimMarten/postcss-rotate-unit/blob/master/LICENSE)
+## [Changelog](https://github.com/SlimMarten/postcss-rotate-unit/blob/master/CHANGELOG.md)
