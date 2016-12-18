@@ -1,4 +1,5 @@
-# postcss-rotate-unit [![Build Status](https://travis-ci.org/SlimMarten/postcss-rotate-unit.svg?branch=master)](https://travis-ci.org/SlimMarten/postcss-rotate-unit)
+# postcss-rotate-unit
+[![Build Status](https://travis-ci.org/SlimMarten/postcss-rotate-unit.svg?branch=master)](https://travis-ci.org/SlimMarten/postcss-rotate-unit) [![GitHub issues](https://img.shields.io/github/issues/SlimMarten/postcss-rotate-unit.svg)](https://github.com/SlimMarten/postcss-rotate-unit/issues)
 
 > [PostCSS](https://github.com/postcss/postcss) plugin to add a default unit to your `rotate()` values.
 
