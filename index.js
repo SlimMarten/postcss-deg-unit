@@ -12,7 +12,7 @@ module.exports = postcss.plugin('postcss-rotate-unit', function(options) {
 		const regExp = /rotate(x|y|z|3d|)\(([^)]+)\)/i;
 
 		// possible rotate() units
-		const rotateUnits = ['deg', 'grad', 'rad', 'turn']
+		const rotateUnits = ['deg', 'grad', 'rad', 'turn'];
 
 		/*----------  global functions  ----------*/
 
