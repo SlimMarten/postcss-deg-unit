@@ -1,124 +1,107 @@
-const postcss = require( 'postcss' );
-
-module.exports = postcss.plugin( 'postcss-deg-unit', function ( options ) {
-
-	return function ( css ) {
+const postcss = require('postcss');
+module.exports = postcss.plugin('postcss-rotate-unit', function(options) {
+	return function(css) {
 
 		/*----------  global vars  ----------*/
-
 		options = options || {};
 
-		// default units
+		// default unit
 		const unit = options.defaultUnit || 'deg';
 
 		// regular expression to filter content of rotate() method
 		const regExp = /rotate(x|y|z|3d|)\(([^)]+)\)/i;
 
 		// possible rotate() units
-		const rotateUnits = [
-			'deg',
-			'grad',
-			'rad',
-			'turn'
-		]
+		const rotateUnits = ['deg', 'grad', 'rad', 'turn']
 
 		/*----------  global functions  ----------*/
-		function getComparedValue(singleVal){
-			let hasUnit = false;
 
-			// check if a unit is already given
-			for(let i = 0; i < rotateUnits.length; i++){
-				let curUnit = rotateUnits[i];
-
-				if(singleVal.indexOf(curUnit) > -1){
-					hasUnit = true;
-				}
-			}
-
-			// return value with or without default unit
-			if(!hasUnit){
-				const output = singleVal += unit;
-				return output;
-			}else{
-				return singleVal;
-			}
-		}
-
-		function getValuesWithUnit(vals){
-
-
-			for(let i = 0; i < vals.length; i++){
+			// check if targetValue already has a unit
+			function getUnitState(value) {
 				let hasUnit = false;
-				let curVal = vals[i];
+				for (let i = 0; i < rotateUnits.length; i++) {
+					let curUnit = rotateUnits[i];
+					if (value.indexOf(curUnit) > -1) {
+						hasUnit = true;
+					}
+				}
 
-				let newValue = getComparedValue(curVal);
-				vals[i] = newValue;
-			}
-
-			return vals;
+			// returns true or flase
+			return hasUnit;
 		}
 
-		function getOperationState(vals){
-			switch(vals.length){
+		// return the index of the value which needs a unit
+		function getTargetValue(vals, decl) {
+			switch (vals.length) {
 				case 0:
-					console.warn('Your Rotation is empty bro.');
-					return false;
+					console.log('Your Rotation is empty bro.');
 					break;
 				case 1:
-					return 0;
+					return 0
 					break;
 				case 2:
-					console.log('what axis was it again!?');
-					return false;
+					throw decl.error('please provide 1 or 4 values');
 					break;
 				case 3:
-					console.log('what axis was it again!?');
-					return false;
+					throw decl.error('please provide 1 or 4 values');
 					break;
 				case 4:
-					return 1;
+					return 3;
+					break;
+				default:
+					throw decl.error('please provide 1 or 4 values');
 					break;
 			}
 		}
 
-		function getStringFromArray(array){
+		// creates a string from a given array of strings
+		function getStringFromArray(array) {
 			let string = '';
-
-			for(let i = 0; i < array.length; i++){
+			for (let i = 0; i < array.length; i++) {
 				string += array[i];
-
-				if(i !== array.length){
-					string += ' ';
+				if (i !== array.length - 1) {
+					string += ', ';
 				}
 			}
-
 			return string;
 		}
 
-		// walk rules
-		css.walkRules( function ( rule ) {
+		// get modified rotation
+		function getModifiedRotation(values, target) {
+			let output = values;
+			output[target] += unit;
+			return output;
+		}
 
-			rule.walkDecls( function ( decl ) {
+		// walk rules
+		css.walkRules(function(rule) {
+			rule.walkDecls(function(decl) {
+
+				// define necessary variables
 				const property = decl.prop;
 				const value = decl.value;
 
-				const rotation = value.match( regExp );
-				const rotationDimension = rotation[1];
-				const rotationValueString = rotation[2];
-				const rotationValues = rotationValueString.split(',');
+				// check if value contains rotate method
+				if(value.indexOf('rotate') >= 0){
+					const rotation = value.match(regExp);
+					const rotationDimension = rotation[1];
+					const rotationValueString = rotation[2];
+					const rotationValues = rotationValueString.split(',');
+					const targetValue = getTargetValue(rotationValues, decl);
 
-				const operationState = getOperationState(rotationValues);
-
-				if(operationState == 0){
-					const modifiedValues = getValuesWithUnit(rotationValues);
-					const output = getStringFromArray(modifiedValues);
-					console.log(output);
+					// check if targetValue is unitless. In case not, add a unit and replace the value
+					const hasUnit = getUnitState(rotationValues[targetValue]);
+					if (hasUnit) {
+						return;
+					} else {
+						const modifiedValues = getModifiedRotation(rotationValues, targetValue);
+						const output = getStringFromArray(modifiedValues);
+						decl.value = value.replace(regExp, `rotate${rotationDimension}(${output})`);
+					}
 				}else{
-					console.log('something went wrong');
 					return;
 				}
-
-			} );
-		} );
+			});
+		});
 	};
-} );
+});
