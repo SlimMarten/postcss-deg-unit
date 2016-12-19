@@ -3,21 +3,21 @@
   "version": "0.0.1",
   "description": "PostCSS plugin to add a default unit to your `rotate()` values",
   "scripts": {
-    "test" : "eslint index.js"
+    "test": "eslint index.js"
   },
   "keywords": [
-  	"css",
-  	"scss",
-  	"less",
-  	"postcss",
-  	"postcss-rotate-unit",
+    "css",
+    "scss",
+    "less",
+    "postcss",
+    "postcss-rotate-unit",
     "rotate()",
     "rotate",
     "rotateX",
     "rotateY",
     "rotateZ",
     "rotate3d",
-  	"transform"
+    "transform"
   ],
   "main": "index.js",
   "author": "Marten Zander",
@@ -29,6 +29,7 @@
     "eslint": "^3.8.1",
     "eslint-config-standard": "^6.2.0",
     "eslint-plugin-promise": "^3.3.0",
-    "eslint-plugin-standard": "^2.0.1"
+    "eslint-plugin-standard": "^2.0.1",
+    "generator-badge": "^1.2.0"
   }
 }
