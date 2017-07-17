@@ -23,7 +23,7 @@
   "author": "Marten Zander",
   "license": "MIT",
   "dependencies": {
-    "postcss": "^5.2.5"
+    "postcss": "^6.0.7"
   },
   "devDependencies": {
     "eslint": "^3.8.1",
